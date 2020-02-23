@@ -2,39 +2,110 @@ package com.wangwang.yangstudyservice.file.leetcode.twoSum;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.omg.PortableInterceptor.INACTIVE;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-/**
- *
- 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
-
- 示例 1:
-
- 输入: "abcabcbb"
- 输出: 3
- 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
- 示例 2:
-
- 输入: "bbbbb"
- 输出: 1
- 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
- 示例 3:
-
- 输入: "pwwkew"
- 输出: 3
- 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
-      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
-
- 来源：力扣（LeetCode）
- 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters
- 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
-public class Solution
+class Solution
 {
 
-//    public int lengthOfLongestSubstring(String s)
-//    {
+    public void function()
+    {
+
+    }
+
+
+    //归并所需的辅助数组
+    private static int[] aux;
+
+    public static void sort(int[] a)
+    {
+        //一次性分配空间
+        aux = new int[a.length];
+        sort(a, 0, a.length - 1);
+    }
+
+    public static void sort(int[] a, int low, int high)
+    {
+        if (low >= high)
+        {
+            return;
+        }
+        int mid = (low + high) / 2;
+        //将左半边排序
+        sort(a, low, mid);
+        //将右半边排序
+        sort(a, mid + 1, high);
+        merge(a, low, mid, high);
+    }
+
+    /**
+     * 该方法先将所有元素复制到aux[]中，然后在归并会a[]中。方法咋归并时(第二个for循环)
+     * 进行了4个条件判断：
+     * - 左半边用尽(取右半边的元素)
+     * - 右半边用尽(取左半边的元素)
+     * - 右半边的当前元素小于左半边的当前元素(取右半边的元素)
+     * - 右半边的当前元素大于等于左半边的当前元素(取左半边的元素)
+     *
+     * @param a
+     * @param low
+     * @param mid
+     * @param high
+     */
+    public static void merge(int[] a, int low, int mid, int high)
+    {
+        //将a[low..mid]和a[mid+1..high]归并
+        int i = low, j = mid + 1;
+        for (int k = low; k <= high; k++)
+        {
+            aux[k] = a[k];
+        }
+
+        for (int k = low; k <= high; k++)
+        {
+            if (i > mid)
+            {
+                a[k] = aux[j++];
+            }
+            else if (j > high)
+            {
+                a[k] = aux[i++];
+            }
+            else if (aux[j] < aux[i])
+            {
+                a[k] = aux[j++];
+            }
+            else
+            {
+                a[k] = aux[i++];
+            }
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Solution solution = new Solution();
+
+//        int [] nums = {1,2,3,4};
 //
-//    }
+//        solution.rob(nums);
+
+//        int[] a = {13, 44, 38, 5, 15, 46, 50, 36};
+//        int low = 0, high = 7;
+//        sort(a, low, high);
+
+        System.out.println(7%2);
+    }
+
 
 }
+
+
+
+
+

@@ -20,6 +20,7 @@ public class Program
 
     //使用lambda表达式
     comparator comparator02 = (a, b) -> (a + b);
+
 }
 
 
