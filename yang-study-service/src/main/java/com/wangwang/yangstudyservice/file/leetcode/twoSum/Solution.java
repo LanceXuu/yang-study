@@ -4,105 +4,43 @@ package com.wangwang.yangstudyservice.file.leetcode.twoSum;
 import lombok.extern.slf4j.Slf4j;
 import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 class Solution
 {
-
-    public void function()
+    class TreeNode
     {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-    }
-
-
-    //归并所需的辅助数组
-    private static int[] aux;
-
-    public static void sort(int[] a)
-    {
-        //一次性分配空间
-        aux = new int[a.length];
-        sort(a, 0, a.length - 1);
-    }
-
-    public static void sort(int[] a, int low, int high)
-    {
-        if (low >= high)
+        TreeNode(int val)
         {
-            return;
-        }
-        int mid = (low + high) / 2;
-        //将左半边排序
-        sort(a, low, mid);
-        //将右半边排序
-        sort(a, mid + 1, high);
-        merge(a, low, mid, high);
-    }
-
-    /**
-     * 该方法先将所有元素复制到aux[]中，然后在归并会a[]中。方法咋归并时(第二个for循环)
-     * 进行了4个条件判断：
-     * - 左半边用尽(取右半边的元素)
-     * - 右半边用尽(取左半边的元素)
-     * - 右半边的当前元素小于左半边的当前元素(取右半边的元素)
-     * - 右半边的当前元素大于等于左半边的当前元素(取左半边的元素)
-     *
-     * @param a
-     * @param low
-     * @param mid
-     * @param high
-     */
-    public static void merge(int[] a, int low, int mid, int high)
-    {
-        //将a[low..mid]和a[mid+1..high]归并
-        int i = low, j = mid + 1;
-        for (int k = low; k <= high; k++)
-        {
-            aux[k] = a[k];
+            this.val = val;
         }
 
-        for (int k = low; k <= high; k++)
-        {
-            if (i > mid)
-            {
-                a[k] = aux[j++];
-            }
-            else if (j > high)
-            {
-                a[k] = aux[i++];
-            }
-            else if (aux[j] < aux[i])
-            {
-                a[k] = aux[j++];
-            }
-            else
-            {
-                a[k] = aux[i++];
-            }
-        }
     }
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2)
+    {
+
+
+return null;
+
+
+    }
+
 
     public static void main(String[] args)
     {
-        Solution solution = new Solution();
 
-//        int [] nums = {1,2,3,4};
-//
-//        solution.rob(nums);
-
-//        int[] a = {13, 44, 38, 5, 15, 46, 50, 36};
-//        int low = 0, high = 7;
-//        sort(a, low, high);
-
-        System.out.println(7%2);
+        int [] k = {0,1,0,4,8,2};
+        for (int i = 0; i < k.length; i++)
+        {
+            System.out.println(k[i]);
+        }
     }
-
-
 }
 
 

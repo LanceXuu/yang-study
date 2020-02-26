@@ -1,6 +1,9 @@
 package com.wangwang.yangstudyservice.file.dataStructure;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Stack;
 
 import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
 
@@ -35,6 +38,203 @@ public class algorithm
         flagArray[j] = temp;
     }
 
+    class BinaryTree
+    {
+        class Node{
+            int val;
+            Node left;
+            Node right;
+            Node(int val)
+            {
+                this.val = val;
+            }
+        }
+
+        /**
+         * preOrderTraverse by reverse
+         * and identical
+        */
+        public void preOrderTraverse(Node node)
+        {
+            if(node == null) return;
+            System.out.println(node.val);
+            preOrderTraverse(node.left);
+            preOrderTraverse(node.right);
+        }
+    }
+
+    /**
+    * @Description: Realize the binary tree by recursive
+    * @Param:
+    * @return:
+    * @Author: xuyang
+    * @Date: 2020/2/25
+    */
+    class Binary
+    {
+        /**
+         * 二叉树的一个节点
+        */
+        class Node
+        {
+            public int val;
+            public Node left;
+            public Node right;
+
+            public Node(int data)
+            {
+                this.val = data;
+            }
+        }
+
+
+
+        public  void preOrderTraverse(Node node)
+        {
+            Stack<Node> stack = new Stack();
+            stack.push(node);
+
+            while(!stack.isEmpty())
+            {
+                Node flag = stack.pop();
+
+                if(node.right!=null)  stack.push(node.right);
+                if(node.left!=null)  stack.push(node.left);
+
+                System.out.println(flag.val);
+            }
+
+        }
+
+        public  void inOrderTraverse(Node node)
+        {
+            Stack<Node> stack = new Stack();
+
+            while(!stack.isEmpty() || node != null)
+            {
+                if(node != null)
+                {
+                    stack.push(node);
+                    node = node.left;
+                }
+                else {
+                    node = stack.pop();
+                    System.out.println(node.val);
+                    node = node.right;
+                }
+
+            }
+
+        }
+
+        public  void postOrderTraverse(Node node)
+        {
+            Stack<Node> stack = new Stack();
+            Stack<Node> helpStack = new Stack();
+            stack.push(node);
+
+            while (!stack.isEmpty())
+            {
+                Node flag = stack.pop();
+                helpStack.push(flag);
+
+                if(node.right != null)  stack.push(node.right);
+                if(node.left != null) stack.push(node.left);
+            }
+
+            for (int i = 0; i < helpStack.size(); i++)
+            {
+                System.out.println(helpStack.pop().val);
+            }
+
+        }
+
+        }
+
+
+    /**
+    * @Description: Quene Implement BY Array
+    * @Param:
+    * @return:
+    * @Author: xuyang
+    * @Date: 2020/2/24
+    */
+    class QueneImplementBYArray
+    {
+        int [] arr;
+        int size;
+        int start;
+        int end;
+
+        public QueneImplementBYArray(int initSize)
+        {
+            if(initSize < 0) throw new IllegalArgumentException("the init size is less than 0");
+
+            arr = new int[initSize];
+            size = 0;
+            start = 0;
+            end = 0;
+        }
+
+        public void push(int num)
+        {
+            if (size == arr.length) throw new IllegalArgumentException("the array is full");
+            size++;
+
+            arr[end] = num;
+            end = end == arr.length -1  ? 0 : end + 1;
+        }
+
+        public int pop()
+        {
+            if (size == 0) throw new IllegalArgumentException("the array is empty");
+            size--;
+
+            int temp = start;
+            start = start == arr.length - 1 ? 0 : start + 1;
+            return arr[temp];
+        }
+    }
+
+
+    /**
+    * @Description: Stack implement by array
+    * @Param: arr[]
+    * @return: null
+    * @Author: xuyang
+    * @Date: 2020/2/24
+    */
+    class StackImplementByArray
+    {
+        int index ;
+        int [] arr;
+
+        public StackImplementByArray(int index, int[] arr, int initSize)
+        {
+            this.index = index;
+            this.arr = arr;
+
+            arr = new int[]{initSize};
+        }
+
+        public void push(int [] arr, int num)
+        {
+            if (index == 0) throw new IllegalArgumentException("the arr has not init");
+            arr[index++] = num;
+        }
+
+        public int pop(int[] arr) throws IllegalAccessException
+        {
+            if (index == 0) throw new IllegalAccessException("there is nothing to pop");
+            return arr[--index];
+        }
+
+        public int peek(int[] arr) throws IllegalAccessException
+        {
+            if (index == 0) throw new IllegalAccessException("there is nothing to pop");
+            return arr[index];
+        }
+    }
     /**
     * @Description: Basic Algorithm mind
     * @Param:
